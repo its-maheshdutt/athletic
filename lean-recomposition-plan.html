@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Recomposition Plan</title>
+<meta name="description" content="Mahesh's shoulder-safe, lean-athletic strength split and Indian non-veg cutting plan, built from InBody scans.">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  /* Deliberately single-world: a dark desert-HUD skin. Painted explicitly so it
+     holds its identity on either host theme — see artifact-design guidance on
+     committed single-look pages. */
+  :root {
+    --void: #0A0906;
+    --void-raised: #16130D;
+    --void-raised-2: #1E1A11;
+    --sand: #E9DAB6;
+    --sand-dim: #A79975;
+    --hairline: rgba(233,218,182,0.16);
+    --hairline-strong: rgba(233,218,182,0.32);
+    --spice: #C1652A;
+    --spice-text: #E08A46;
+    --spice-soft: rgba(193,101,42,0.14);
+    --steel: #86ACA5;
+    --good: #86B893;
+    --good-soft: rgba(134,184,147,0.12);
+    --caution: #DD6155;
+    --caution-soft: rgba(221,97,85,0.14);
+    --shadow: 0 0 0 1px rgba(233,218,182,0.05), 0 24px 48px rgba(0,0,0,0.6);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { color-scheme: dark; }
+
+  body {
+    margin: 0;
+    background: var(--void);
+    color: var(--sand);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  /* faint scanline texture — static, not animated */
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image: repeating-linear-gradient(0deg, rgba(233,218,182,0.025) 0px, rgba(233,218,182,0.025) 1px, transparent 1px, transparent 3px);
+    mix-blend-mode: overlay;
+  }
+
+  ::selection { background: var(--spice-soft); color: var(--sand); }
+
+  h1, h2, h3, h4 {
+    font-family: "Tomorrow", ui-sans-serif, system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--sand);
+  }
+
+  .num { font-family: "Space Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  .mono { font-family: "Space Mono", ui-monospace, monospace; }
+
+  a { color: var(--spice-text); text-decoration-color: var(--hairline-strong); }
+  a:hover { text-decoration-color: var(--spice-text); }
+
+  a:focus-visible, summary:focus-visible, button:focus-visible {
+    outline: 2px solid var(--spice-text); outline-offset: 3px;
+  }
+
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 20px 96px; position: relative; z-index: 1; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    border-bottom: 1px solid var(--hairline);
+    padding: 52px 20px 32px;
+    background:
+      radial-gradient(600px 300px at 88% -10%, rgba(193,101,42,0.16), transparent 60%),
+      var(--void);
+    overflow: hidden;
+  }
+  .hero::after {
+    content: ""; position: absolute; top: 24px; right: 28px; width: 120px; height: 120px;
+    border-radius: 50%; pointer-events: none;
+    background:
+      repeating-radial-gradient(circle at center, transparent 0 14px, rgba(233,218,182,0.07) 15px, transparent 16px);
+    opacity: 0.6;
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; position: relative; z-index: 1; }
+  .eyebrow {
+    font-family: "Space Mono", monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--spice-text);
+    margin: 0 0 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--hairline);
+    display: inline-block;
+  }
+  h1.title { font-size: clamp(30px, 6.4vw, 46px); line-height: 1.05; letter-spacing: 0.02em; }
+  .subtitle { color: var(--sand-dim); font-size: 16px; margin-top: 14px; max-width: 58ch; }
+
+  /* ---------- NAV ---------- */
+  nav.jump {
+    position: sticky; top: 0; z-index: 5;
+    background: color-mix(in srgb, var(--void) 90%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--hairline);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav.jump::before {
+    content: ""; display: block; height: 2px; width: 100%;
+    background: linear-gradient(90deg, transparent, var(--spice) 40%, var(--spice) 60%, transparent);
+    opacity: 0.5;
+  }
+  nav.jump::-webkit-scrollbar { display: none; }
+  nav.jump .row { display: flex; gap: 4px; padding: 10px 20px; max-width: 780px; margin: 0 auto; width: max-content; min-width: 100%; }
+  nav.jump a {
+    flex: none;
+    font-family: "Space Mono", monospace;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    color: var(--sand-dim);
+    border: 1px solid var(--hairline);
+    padding: 7px 12px;
+    white-space: nowrap;
+  }
+  nav.jump a:hover { border-color: var(--spice); color: var(--spice-text); }
+
+  section { padding-top: 46px; scroll-margin-top: 56px; }
+  section + section { border-top: 1px solid var(--hairline); }
+
+  .kicker {
+    display: flex; align-items: baseline; gap: 12px; margin-bottom: 18px;
+  }
+  .kicker .n { font-family: "Space Mono", monospace; color: var(--spice-text); font-size: 12.5px; letter-spacing: 0.06em; }
+  .kicker h2 { font-size: 21px; }
+
+  p.lede { color: var(--sand-dim); max-width: 62ch; margin: 0 0 20px; }
+
+  /* ---------- PANELS (shared chamfer look) ---------- */
+  .panel {
+    background: var(--void-raised);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+    box-shadow: var(--shadow);
+  }
+
+  /* ---------- STAT TILES ---------- */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0 28px; }
+  .stat {
+    padding: 14px 14px 12px;
+  }
+  .stat .label { font-family: "Space Mono", monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--sand-dim); }
+  .stat .value { font-family: "Space Mono", monospace; font-size: 21px; font-weight: 700; margin-top: 5px; color: var(--sand); }
+  .stat .delta { font-size: 11.5px; margin-top: 4px; font-family: "Space Mono", monospace; }
+  .delta.up { color: var(--good); }
+  .delta.flag { color: var(--caution); }
+
+  table.compare { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0 22px; }
+  table.compare th, table.compare td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--hairline); }
+  table.compare th { font-family: "Space Mono", monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--sand-dim); font-weight: 400; }
+  table.compare td.num, table.compare th.num { text-align: right; font-family: "Space Mono", monospace; }
+  table.compare tr:last-child td { border-bottom: none; }
+  table.compare tr:hover td { background: var(--void-raised); }
+  .wrap-table { overflow-x: auto; }
+
+  /* ---------- CALLOUTS ---------- */
+  .callout {
+    padding: 14px 16px; margin: 16px 0; font-size: 14.5px;
+    background: var(--void-raised);
+    border-left: 3px solid var(--hairline-strong);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  }
+  .callout .ctitle { font-family: "Space Mono", monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; display: block; }
+  .callout.caution { border-left-color: var(--caution); }
+  .callout.caution .ctitle { color: var(--caution); }
+  .callout.good { border-left-color: var(--good); }
+  .callout.good .ctitle { color: var(--good); }
+  .callout.neutral { border-left-color: var(--spice); }
+  .callout.neutral .ctitle { color: var(--spice-text); }
+
+  /* ---------- DAY ACCORDIONS ---------- */
+  .day {
+    background: var(--void-raised); border: 1px solid var(--hairline);
+    margin: 0 0 14px; overflow: hidden;
+  }
+  .day[open] { border-color: var(--hairline-strong); }
+  .day summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 15px 18px; cursor: pointer;
+    background: var(--void-raised-2);
+    border-bottom: 1px solid transparent;
+    list-style: none;
+  }
+  .day summary::-webkit-details-marker { display: none; }
+  .day summary::marker { content: ""; }
+  .day[open] summary { border-bottom-color: var(--hairline); }
+  .day summary:hover { background: color-mix(in srgb, var(--void-raised-2) 80%, var(--spice) 8%); }
+  .day-head-left { display: flex; align-items: center; gap: 14px; }
+  .day .dtag { font-family: "Space Mono", monospace; font-size: 11.5px; color: var(--spice-text); letter-spacing: 0.08em; }
+  .day summary h3 { font-size: 16.5px; }
+  .chevron {
+    font-family: "Space Mono", monospace; color: var(--sand-dim); font-size: 13px;
+    transition: transform 0.2s ease; flex: none;
+  }
+  .day[open] .chevron { transform: rotate(180deg); color: var(--spice-text); }
+
+  .day-body { padding: 16px 18px 18px; }
+  .warmup { font-size: 13.5px; color: var(--sand-dim); margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px dashed var(--hairline); }
+  .warmup b { color: var(--sand); font-weight: 600; }
+
+  table.ex { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.ex th { text-align: left; font-family: "Space Mono", monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--sand-dim); font-weight: 400; padding: 0 8px 6px 0; }
+  table.ex td { padding: 9px 8px 9px 0; border-top: 1px solid var(--hairline); vertical-align: top; }
+  table.ex td.sets { font-family: "Space Mono", monospace; white-space: nowrap; color: var(--steel); font-weight: 700; }
+  table.ex td.note { color: var(--sand-dim); font-size: 13px; }
+  table.ex tr:first-child td { border-top: none; }
+
+  .finisher { margin-top: 12px; font-size: 13.5px; color: var(--sand-dim); padding-top: 12px; border-top: 1px dashed var(--hairline); }
+
+  /* ---------- SCHEDULE STRIP ---------- */
+  .week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 18px 0 8px; }
+  .wcell { border: 1px solid var(--hairline); padding: 8px 4px; text-align: center; background: var(--void-raised); }
+  .wcell .d { font-family: "Space Mono", monospace; font-size: 10px; color: var(--spice-text); text-transform: uppercase; letter-spacing: 0.05em; }
+  .wcell .t { font-size: 11px; font-weight: 600; margin-top: 5px; line-height: 1.25; color: var(--sand); text-transform: uppercase; letter-spacing: 0.02em; }
+  .wcell.rest { background: transparent; }
+  .wcell.rest .d { color: var(--sand-dim); }
+
+  /* ---------- FOOD TABLE ---------- */
+  table.food { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 10px 0 22px; }
+  table.food th { text-align: left; padding: 9px 10px; background: var(--void-raised-2); font-family: "Space Mono", monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--spice-text); font-weight: 400; }
+  table.food td { padding: 10px 10px; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  table.food tr:last-child td { border-bottom: none; }
+  table.food td:first-child { font-weight: 600; white-space: nowrap; color: var(--sand); }
+
+  .macro-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 18px 0; }
+  .macro { padding: 12px; }
+  .macro .m-label { font-family: "Space Mono", monospace; font-size: 10px; color: var(--sand-dim); text-transform: uppercase; letter-spacing: 0.06em; }
+  .macro .m-value { font-family: "Space Mono", monospace; font-size: 18px; font-weight: 700; margin-top: 4px; color: var(--sand); }
+  .macro .m-sub { font-size: 11px; color: var(--sand-dim); }
+
+  ul.plain { padding-left: 18px; margin: 10px 0; }
+  ul.plain li { margin-bottom: 6px; font-size: 14.5px; }
+
+  .checklist { list-style: none; padding: 0; margin: 12px 0; display: grid; gap: 8px; }
+  .checklist li { display: flex; gap: 10px; font-size: 14.5px; align-items: flex-start; }
+  .checklist li::before { content: "»"; color: var(--spice-text); font-weight: 700; flex: none; font-family: "Space Mono", monospace; }
+
+  footer {
+    max-width: 780px; margin: 40px auto 0; padding: 20px; color: var(--sand-dim);
+    font-family: "Space Mono", monospace; font-size: 11px; text-align: center;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    border-top: 1px solid var(--hairline);
+  }
+
+  @media (max-width: 560px) {
+    .stats { grid-template-columns: 1fr 1fr; }
+    .macro-row { grid-template-columns: 1fr 1fr; }
+    .week { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+    .chevron { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Training Protocol · Mahesh · Aug 24, 2026</p>
+    <h1 class="title">The Recomposition Plan</h1>
+    <p class="subtitle">A shoulder-safe, gym-based strength split and an Indian non-veg cut, built from your own InBody scans — aimed at 75&nbsp;kg, a lean athletic look built on compound strength and power rather than isolation volume, and stronger shoulders, arms and forearms without loading a painful shoulder.</p>
+  </div>
+</div>
+
+<nav class="jump">
+  <div class="row">
+    <a href="#overview">Overview</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#warmup">Warm-up</a>
+    <a href="#training">Training</a>
+    <a href="#shoulder">Shoulder care</a>
+    <a href="#fat">Belly &amp; chest fat</a>
+    <a href="#nutrition">Nutrition</a>
+    <a href="#progress">Tracking</a>
+    <a href="#notes">Notes</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<section id="overview">
+  <div class="kicker"><span class="n">// 01</span><h2>Where you're starting from</h2></div>
+  <p class="lede">Your two InBody scans, five weeks apart, already show the pattern this plan leans on: you gained muscle and lost fat at the same time. The scale barely moved — that's expected, and it's not a bad sign.</p>
+
+  <div class="stats">
+    <div class="stat panel"><div class="label">Weight</div><div class="value num">79.9 kg</div><div class="delta up">▲ 0.8 kg vs Jul 4</div></div>
+    <div class="stat panel"><div class="label">Body fat %</div><div class="value num">28.3%</div><div class="delta up">▼ 1.3 pts vs Jul 4</div></div>
+    <div class="stat panel"><div class="label">Skeletal muscle</div><div class="value num">32.4 kg</div><div class="delta up">▲ 1.1 kg vs Jul 4</div></div>
+    <div class="stat panel"><div class="label">Fat mass</div><div class="value num">22.6 kg</div><div class="delta up">▼ 0.8 kg vs Jul 4</div></div>
+    <div class="stat panel"><div class="label">Visceral fat level</div><div class="value num">10</div><div class="delta flag">reference: 1–9</div></div>
+    <div class="stat panel"><div class="label">InBody score</div><div class="value num">68</div><div class="delta up">▲ 3 vs Jul 4</div></div>
+  </div>
+
+  <div class="wrap-table">
+    <table class="compare">
+      <tr><th>Metric</th><th class="num">Jul 4</th><th class="num">Aug 11</th><th class="num">Change</th></tr>
+      <tr><td>Weight</td><td class="num">79.1 kg</td><td class="num">79.9 kg</td><td class="num">+0.8</td></tr>
+      <tr><td>Skeletal muscle mass</td><td class="num">31.3 kg</td><td class="num">32.4 kg</td><td class="num">+1.1</td></tr>
+      <tr><td>Body fat mass</td><td class="num">23.4 kg</td><td class="num">22.6 kg</td><td class="num">−0.8</td></tr>
+      <tr><td>Body fat %</td><td class="num">29.6%</td><td class="num">28.3%</td><td class="num">−1.3</td></tr>
+      <tr><td>BMI</td><td class="num">25.8</td><td class="num">26.1</td><td class="num">+0.3</td></tr>
+      <tr><td>Basal metabolism</td><td class="num">1574 kcal</td><td class="num">1608 kcal</td><td class="num">+34</td></tr>
+    </table>
+  </div>
+
+  <div class="callout good">
+    <span class="ctitle">Read this before you judge progress by the scale</span>
+    Between the two scans you added 1.1&nbsp;kg of muscle and lost 0.8&nbsp;kg of fat — a genuine recomposition, not a plateau. If that rate continues, expect the scale to move slower than "5&nbsp;kg to lose" suggests, because muscle you're building offsets fat you're losing. Judge this plan by body-fat % and visceral level, not the number alone.
+  </div>
+
+  <p class="lede"><b style="color:var(--sand)">12-week target:</b> body fat down toward 23–24% (from 28.3%), visceral fat level back under 10, and scale weight around 76–77&nbsp;kg — with muscle mass held or slightly up. Reaching 75&nbsp;kg at a genuinely lower body-fat % (~20–22%) is realistic in the 16–20 week range if the trend holds. Re-scan every 4 weeks to true this up.</p>
+
+  <p class="lede">Segment data on both scans flags the same thing: trunk and chest carry proportionally more fat than your arms and legs — a very common pattern, and one that responds fine to the same fat-loss process, just proportionally last. There's more on this in <a href="#fat">Belly &amp; chest fat</a> below.</p>
+</section>
+
+<section id="schedule">
+  <div class="kicker"><span class="n">// 02</span><h2>The week at a glance</h2></div>
+  <p class="lede">Four gym sessions, three lighter days. Steps and shoulder mobility happen daily, gym or not.</p>
+  <div class="week">
+    <div class="wcell"><div class="d">Mon</div><div class="t">Push</div></div>
+    <div class="wcell"><div class="d">Tue</div><div class="t">Pull</div></div>
+    <div class="wcell rest"><div class="d">Wed</div><div class="t">Walk + mobility</div></div>
+    <div class="wcell"><div class="d">Thu</div><div class="t">Legs + core</div></div>
+    <div class="wcell"><div class="d">Fri</div><div class="t">Shoulders &amp; arms</div></div>
+    <div class="wcell rest"><div class="d">Sat</div><div class="t">Walk + mobility</div></div>
+    <div class="wcell rest"><div class="d">Sun</div><div class="t">Full rest</div></div>
+  </div>
+  <p class="lede" style="margin-top:14px">Swap days around your week freely — the only rule is at least one rest or walk-only day between Push and Shoulders/Arms, since both load the same shoulder joint.</p>
+</section>
+
+<section id="warmup">
+  <div class="kicker"><span class="n">// 03</span><h2>Warm-up &amp; stretching</h2></div>
+  <p class="lede">A warm-up has four jobs, in this order: raise your body temperature, open the joints you're about to use, switch on the muscles you need, then rehearse the first lift before it gets heavy. 5–8 minutes, every session, no skipping it on a rushed day — that's when a cold shoulder gets hurt.</p>
+
+  <div class="callout neutral">
+    <span class="ctitle">Dynamic before, static after</span>
+    Everything below the workout heading is <i>dynamic</i> — movement-based. Save deep, held stretches for after training (see cool-down at the bottom): holding a long static stretch on a cold, unloaded muscle right before lifting can temporarily reduce the strength and power you can produce in that same session.
+  </div>
+
+  <h3 style="font-size:14px;margin:22px 0 10px">Before Push, Pull, or Shoulders &amp; Arms</h3>
+  <table class="ex">
+    <tr><th>Move</th><th>Sets × reps</th><th>Note</th></tr>
+    <tr><td>Easy cardio</td><td class="sets">3–5 min</td><td class="note">Raise body temperature without fatigue — bike, brisk walk, rower.</td></tr>
+    <tr><td>Band lat stretch</td><td class="sets">30–45s /side</td><td class="note">Opens the lats before pressing or pulling.</td></tr>
+    <tr><td>Overhead triceps stretch</td><td class="sets">30–45s /side</td><td class="note">Gentle only — skip if it pulls at the shoulder itself.</td></tr>
+    <tr><td>Band pull-apart</td><td class="sets">2×15–20</td><td class="note">Wakes up the upper back before anything else loads it.</td></tr>
+    <tr><td>Scap push-up</td><td class="sets">2×8–12</td><td class="note">Shoulder blades learn to move before load is added.</td></tr>
+    <tr><td>Band external rotation</td><td class="sets">2×10–15 /side</td><td class="note">Rotator-cuff control — the same joint you're protecting all plan.</td></tr>
+    <tr><td>Face pull or rear delt fly</td><td class="sets">1–2×12–20</td><td class="note">Rear delts and posture, light weight.</td></tr>
+    <tr><td>Ramp-up sets for the first lift</td><td class="sets">light×12 → medium×8 → work×6–10</td><td class="note">Rehearse the exact movement pattern before your working weight.</td></tr>
+  </table>
+
+  <h3 style="font-size:14px;margin:24px 0 10px">Before Legs &amp; Core</h3>
+  <table class="ex">
+    <tr><th>Move</th><th>Sets × reps</th><th>Note</th></tr>
+    <tr><td>Easy cardio</td><td class="sets">3–5 min</td><td class="note">—</td></tr>
+    <tr><td>Bodyweight squat</td><td class="sets">2×10</td><td class="note">Grooves depth and knee tracking.</td></tr>
+    <tr><td>Glute bridge</td><td class="sets">2×10–15</td><td class="note">Switches the glutes on before leg work.</td></tr>
+    <tr><td>Leg swings</td><td class="sets">10 F/B + 10 S/S /side</td><td class="note">Hips move through all directions you'll need.</td></tr>
+    <tr><td>Ankle rocks</td><td class="sets">10 /side</td><td class="note">Ankles ready for squats and lunges.</td></tr>
+    <tr><td>Hip flexor raise</td><td class="sets">2×10 /side</td><td class="note">Front-hip control before loading.</td></tr>
+    <tr><td>Tibialis raise</td><td class="sets">2×15–20</td><td class="note">Lower-leg prep for knees and ankles.</td></tr>
+    <tr><td>Glute-med wall hold</td><td class="sets">iso 45s /side</td><td class="note">Hip stability before single-leg work.</td></tr>
+    <tr><td>Walking lunge or split squat</td><td class="sets">1–2×8 /side</td><td class="note">Rehearses the lower-body pattern, light.</td></tr>
+    <tr><td>Ramp-up sets for the first lift</td><td class="sets">light×12 → medium×8 → work×6–10</td><td class="note">—</td></tr>
+  </table>
+
+  <h3 style="font-size:14px;margin:24px 0 10px">Cool-down — static stretches, after training</h3>
+  <p class="lede" style="margin:0 0 10px">This is when static stretching earns its place — muscles are warm, and nothing about to lift depends on peak power anymore. About 5 minutes, whole body, 1 round each.</p>
+  <table class="ex">
+    <tr><th>Stretch</th><th>Hold</th><th>Note</th></tr>
+    <tr><td>Doorway chest stretch</td><td class="sets">30–45s /side</td><td class="note">—</td></tr>
+    <tr><td>Overhead lat stretch</td><td class="sets">30–45s /side</td><td class="note">—</td></tr>
+    <tr><td>Cross-body shoulder stretch</td><td class="sets">20–30s /side</td><td class="note">Gentle — stop well short of the pinch point.</td></tr>
+    <tr><td>Kneeling hip flexor stretch</td><td class="sets">30–45s /side</td><td class="note">—</td></tr>
+    <tr><td>Hamstring stretch</td><td class="sets">30–45s /side</td><td class="note">—</td></tr>
+    <tr><td>Quad stretch</td><td class="sets">30–45s /side</td><td class="note">—</td></tr>
+    <tr><td>Child's pose / thoracic rotation</td><td class="sets">45–60s</td><td class="note">—</td></tr>
+  </table>
+
+  <div class="callout caution">
+    <span class="ctitle">Shoulder reminder</span>
+    Keep the shoulder stretches on this page gentle and well inside a pain-free range, same rule as the <a href="#shoulder">rotator-cuff sequence</a> — a stretch that reproduces the pinch isn't "working through it," it's aggravating the same issue you're managing.
+  </div>
+</section>
+
+<section id="training">
+  <div class="kicker"><span class="n">// 04</span><h2>Training split</h2></div>
+  <p class="lede">No bench press, and nothing that loads the front of the shoulder the way a barbell bench or a heavy overhead press does. Cables, machines and neutral grips instead — they let you build real chest, shoulder and arm size while keeping the joint on a controlled, adjustable path. <b style="color:var(--sand)">Progression:</b> once every set hits the top of its rep range with clean form, add the smallest weight increment available next session. Any pinching, sharp, or radiating pain — stop that exercise, drop the load, or swap in the regression noted.</p>
+
+  <div class="callout neutral">
+    <span class="ctitle">Lean and athletic, not bodybuilder-volume</span>
+    Revised from a straight bodybuilder split toward a functional one: fewer isolation exercises per muscle, working weight kept lower-rep and heavier (6–10 for most compounds instead of 12–20), and every day now has one explosive or carry-based movement — kettlebell swings, box step-ups, power push-ups — full recovery between sets, no chasing a pump. Less time under the bar per session, more of it spent moving like an athlete. Direct arm/shoulder/forearm work is still in here since that's a stated goal, just trimmed to what earns its place rather than stacked three isolation moves deep.
+  </div>
+
+  <p class="lede" style="margin-top:22px;font-size:13px;color:var(--sand-dim)">Tap a day to expand it.</p>
+
+  <details class="day" open>
+    <summary>
+      <span class="day-head-left"><span class="dtag">DAY 01</span><h3>Push — Chest &amp; Triceps</h3></span>
+      <span class="chevron">▾</span>
+    </summary>
+    <div class="day-body">
+      <div class="warmup"><b>Warm-up (5 min):</b> easy cardio 3 min · band pull-apart 2×15 · scap push-up 2×10 · arm twists 10 · behind-the-back hold 10s/side — <a href="#warmup">full sequence</a></div>
+      <table class="ex">
+        <tr><th>Exercise</th><th>Sets × reps</th><th>Note</th></tr>
+        <tr><td>Low-incline neutral-grip DB press</td><td class="sets">4×6–8</td><td class="note">Heavier, lower reps — the strength anchor of the day. 15–30° incline, palms in. Stop short of any pinch.</td></tr>
+        <tr><td>Standing cable chest press</td><td class="sets">3×8–10</td><td class="note">Constant tension, easiest on the joint of all pressing here.</td></tr>
+        <tr><td>Explosive push-up</td><td class="sets">3×5–6</td><td class="note">Hands leave the floor slightly, or just drive up as fast as possible. Power, not fatigue — rest a full 60–90s. Regress to a fast knee push-up if needed.</td></tr>
+        <tr><td>Rope triceps pressdown</td><td class="sets">2×10–12</td><td class="note">—</td></tr>
+        <tr><td>Face pull</td><td class="sets">2×15</td><td class="note">Non-negotiable — this stays regardless of the rest of the trim.</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details class="day">
+    <summary>
+      <span class="day-head-left"><span class="dtag">DAY 02</span><h3>Pull — Back, Biceps &amp; Forearms</h3></span>
+      <span class="chevron">▾</span>
+    </summary>
+    <div class="day-body">
+      <div class="warmup"><b>Warm-up (5 min):</b> band pull-apart 2×15 · dead hang 2×20–30s · thoracic rotations 10/side — <a href="#warmup">full sequence</a></div>
+      <table class="ex">
+        <tr><th>Exercise</th><th>Sets × reps</th><th>Note</th></tr>
+        <tr><td>Lat pulldown, neutral or wide grip</td><td class="sets">4×6–8</td><td class="note">Strength-focused, the anchor lift for back width.</td></tr>
+        <tr><td>Chest-supported row</td><td class="sets">3×8–10</td><td class="note">—</td></tr>
+        <tr><td>Single-arm DB row</td><td class="sets">2×8–10 /side</td><td class="note">—</td></tr>
+        <tr><td>Kettlebell swing</td><td class="sets">3×12–15</td><td class="note">Explosive hip hinge — does more for an athletic look than another isolation move ever will. No kettlebell? Sub a fast DB Romanian-deadlift-to-high-pull.</td></tr>
+        <tr><td>Hammer curl</td><td class="sets">2×10–12</td><td class="note">Brachioradialis — forearm size driver. Kept lean at 2 sets.</td></tr>
+        <tr><td>Farmer's carry, heavy</td><td class="sets">3×30–40m</td><td class="note">Grip, forearms, core, posture — one move.</td></tr>
+        <tr><td>Wrist curl + reverse wrist curl</td><td class="sets">1×15–20 each</td><td class="note">Superset, light weight, full stretch.</td></tr>
+      </table>
+      <div class="finisher"><b style="color:var(--sand)">Finisher:</b> dead hang from a bar, 2×max — grip work that also gently decompresses the shoulder.</div>
+    </div>
+  </details>
+
+  <details class="day">
+    <summary>
+      <span class="day-head-left"><span class="dtag">DAY 03</span><h3>Legs &amp; Core</h3></span>
+      <span class="chevron">▾</span>
+    </summary>
+    <div class="day-body">
+      <div class="warmup"><b>Warm-up (5 min):</b> bodyweight squat 2×10 · glute bridge 2×12 · leg swings 10/side · ankle rocks 10/side — <a href="#warmup">full sequence</a></div>
+      <table class="ex">
+        <tr><th>Exercise</th><th>Sets × reps</th><th>Note</th></tr>
+        <tr><td>Leg press or hack squat</td><td class="sets">3×8–10</td><td class="note">—</td></tr>
+        <tr><td>Romanian deadlift</td><td class="sets">3×8–10</td><td class="note">Already covers the hamstrings — no separate leg curl needed.</td></tr>
+        <tr><td>Walking lunge or split squat</td><td class="sets">2×10 /side</td><td class="note">—</td></tr>
+        <tr><td>Low box step-up or controlled box jump</td><td class="sets">3×6 /side or 3×6</td><td class="note">Single-leg power — the move that actually builds "moves like an athlete", not just size.</td></tr>
+        <tr><td>Standing calf raise</td><td class="sets">3×15</td><td class="note">—</td></tr>
+        <tr><td>Pallof press</td><td class="sets">2×12 /side</td><td class="note">Anti-rotation core, shoulder-neutral.</td></tr>
+        <tr><td>Hanging knee raise or dead bug</td><td class="sets">2×12–15</td><td class="note">—</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details class="day">
+    <summary>
+      <span class="day-head-left"><span class="dtag">DAY 04</span><h3>Shoulders, Arms &amp; Forearms</h3></span>
+      <span class="chevron">▾</span>
+    </summary>
+    <div class="day-body">
+      <div class="warmup"><b>Warm-up (5 min):</b> full rotator cuff sequence — see <a href="#shoulder">Shoulder care</a> — plus band external rotation from the <a href="#warmup">warm-up protocol</a></div>
+      <table class="ex">
+        <tr><th>Exercise</th><th>Sets × reps</th><th>Note</th></tr>
+        <tr><td>Cable lateral raise</td><td class="sets">3×12–15</td><td class="note">Constant tension beats heavy dumbbells here. Reined in from a pure burn-out rep range.</td></tr>
+        <tr><td>Cable or band Y-raise, incline</td><td class="sets">2×12–15</td><td class="note">Lower traps, posture — also covers rear delts, so no separate reverse-fly needed.</td></tr>
+        <tr><td>Single-arm landmine press</td><td class="sets">3×8–10 /side</td><td class="note">Naturally shoulder-friendly bar path. Stop short of lockout if it pinches.</td></tr>
+        <tr><td>Rope hammer curl</td><td class="sets">2×10–12</td><td class="note">—</td></tr>
+        <tr><td>Overhead rope triceps extension</td><td class="sets">2×10–12</td><td class="note">Pain-free range only.</td></tr>
+        <tr><td>Wrist roller or plate pinch hold</td><td class="sets">2 rounds</td><td class="note">Forearm/grip finisher.</td></tr>
+      </table>
+      <div class="finisher"><b style="color:var(--sand)">Finisher — conditioning, not steady cardio:</b> 8 rounds of 30s fast incline walk / 30s easy (bike or rower intervals work too). This kind of interval work builds the lean, athletic engine in a way flat steady-state doesn't — swap in sled push/pull or battle ropes instead if your gym has them and your shoulder's fine with it.</div>
+    </div>
+  </details>
+
+  <div class="callout neutral" style="margin-top:22px">
+    <span class="ctitle">On rest days</span>
+    A 20–30 minute easy walk plus the 2-minute rotator cuff sequence keeps the shoulder mobile without adding load. Steps still count toward your daily target either way. Swapping a walk for a game of football, badminton, or similar is fine too — sport-style movement fits this plan's direction better than more time on a machine.
+  </div>
+</section>
+
+<section id="shoulder">
+  <div class="kicker"><span class="n">// 05</span><h2>Shoulder care</h2></div>
+  <p class="lede">This split avoids the movements most likely to aggravate a painful shoulder, but it isn't a diagnosis or treatment. The routine below is a mobility sequence adapted from DAREBEE's rotator-cuff work — run it before every Push and Shoulders/Arms day, and ideally daily.</p>
+
+  <table class="ex" style="margin-bottom:8px">
+    <tr><th>Move</th><th>Reps</th></tr>
+    <tr><td>Arm twists</td><td class="sets">10</td></tr>
+    <tr><td>Raised arm twists</td><td class="sets">10</td></tr>
+    <tr><td>Half bows</td><td class="sets">10</td></tr>
+    <tr><td>Full bows</td><td class="sets">10</td></tr>
+    <tr><td>Behind-the-back hold</td><td class="sets">10s /side</td></tr>
+    <tr><td>Elbows in</td><td class="sets">10</td></tr>
+  </table>
+  <p class="lede" style="margin:0 0 8px">Move slowly, well inside a pain-free range — this builds control of the small rotator-cuff muscles, not visible size. Consistency beats intensity here.</p>
+
+  <div class="callout caution">
+    <span class="ctitle">See a physiotherapist or sports doctor if</span>
+    Pain is sharp or pinching rather than a dull ache · it wakes you at night · you lose strength or range lifting the arm overhead · pain radiates down toward the elbow. Any of these are worth a proper shoulder assessment before you add load — this plan can't substitute for that, and pushing through those signs is how a manageable issue becomes a structural one.
+  </div>
+</section>
+
+<section id="fat">
+  <div class="kicker"><span class="n">// 06</span><h2>Belly &amp; chest fat</h2></div>
+  <p class="lede">Your segmental data flags exactly what you're describing: trunk fat is proportionally much higher than arm or leg fat on both scans. That's a genuine pattern — central fat storage is common in South Asian body types even at a "normal" BMI, and it's what's behind your visceral fat level sitting at 10, just above the 1–9 reference range on the InBody sheet.</p>
+  <ul class="checklist">
+    <li>Spot reduction doesn't work — no ab or chest exercise burns fat from that specific area. Overall body-fat % has to drop, and the trunk tends to be the last place it visibly leaves.</li>
+    <li>Visceral fat responds disproportionately well to the basics: a consistent calorie deficit, daily steps/movement (not just gym days), resistance training to protect muscle while you cut, 7–8 hours of sleep, and lower stress.</li>
+    <li>Cut added sugar and alcohol before cutting carbs generally — both are strongly linked to visceral fat specifically, more than total carbohydrate intake is.</li>
+    <li>Chest training (the incline press and cable chest press in this plan) builds and firms the muscle under the fat, which noticeably improves shape as body fat drops — but it can't remove fat tissue sitting on top of it. Expect chest shape to improve steadily alongside overall fat loss, not overnight.</li>
+    <li>If you ever notice a firm, coin-sized lump specifically behind the nipple rather than general softness — that's a medical question (possible gynecomastia), not a training one. Worth mentioning to a doctor, not something to try to train away.</li>
+  </ul>
+</section>
+
+<section id="nutrition">
+  <div class="kicker"><span class="n">// 07</span><h2>Nutrition</h2></div>
+  <p class="lede">Built off your Aug 11 InBody recommended intake (2,335 kcal, essentially your maintenance). A 15% deficit gets you to the range below — enough to lose fat steadily without stalling the muscle gain you're already seeing.</p>
+
+  <div class="macro-row">
+    <div class="macro panel"><div class="m-label">Calories</div><div class="m-value num">~2,000</div><div class="m-sub">range 1,900–2,050 kcal/day</div></div>
+    <div class="macro panel"><div class="m-label">Protein</div><div class="m-value num">160–170g</div><div class="m-sub">~2g per kg bodyweight</div></div>
+    <div class="macro panel"><div class="m-label">Fat</div><div class="m-value num">55–65g</div><div class="m-sub">~0.7g per kg bodyweight</div></div>
+    <div class="macro panel"><div class="m-label">Carbs</div><div class="m-value num">190–220g</div><div class="m-sub">fills the rest, more on gym days</div></div>
+  </div>
+
+  <p class="lede">Fibre ≥30g/day, water ~3–3.5L/day. Recalculate this block from your next InBody's basal metabolism figure every 4 weeks — as you gain muscle, your maintenance number will drift up slightly.</p>
+
+  <h3 style="font-size:14px;margin:24px 0 10px">Protein options by situation</h3>
+  <table class="food">
+    <tr><th>Situation</th><th>Go-to options</th></tr>
+    <tr><td>Fast breakfast</td><td>Egg-white bhurji or omelette with vegetables · moong dal chilla with egg · boiled eggs</td></tr>
+    <tr><td>No-cook</td><td>Hung curd / Greek yogurt · canned tuna · leftover tandoori or grilled chicken</td></tr>
+    <tr><td>Work snack</td><td>Roasted chana · boiled eggs · protein bar · makhana (roasted foxnuts)</td></tr>
+    <tr><td>Sweet craving</td><td>Greek yogurt + fruit + a little honey · protein shake with banana</td></tr>
+    <tr><td>Meal prep</td><td>Grilled or tandoori chicken breast · fish curry, light oil · egg curry · dal, extra portion</td></tr>
+    <tr><td>Travel</td><td>Boiled eggs · roasted chana · protein bar · curd cup</td></tr>
+    <tr><td>Eating out</td><td>Tikka or tandoori over fried or malai-based curries · dal + sabzi + 1–2 roti over naan/paratha · skip sugary lassi or soda</td></tr>
+  </table>
+
+  <h3 style="font-size:14px;margin:24px 0 10px">Illustrative day, ≈2,000 kcal / 165g protein</h3>
+  <table class="food">
+    <tr><th>Meal</th><th>Roughly</th></tr>
+    <tr><td>Breakfast</td><td>4 egg whites + 2 whole eggs bhurji with onion, tomato, capsicum · 2 multigrain roti</td></tr>
+    <tr><td>Mid-morning</td><td>200g curd or Greek yogurt · 30g roasted chana</td></tr>
+    <tr><td>Lunch</td><td>200g grilled chicken · 1 cup dal · 2 roti or small bowl rice · large salad</td></tr>
+    <tr><td>Around training</td><td>Protein shake (1 scoop) + a banana</td></tr>
+    <tr><td>Dinner</td><td>150g grilled chicken or fish curry · sautéed vegetables · 1–2 roti or small rice</td></tr>
+  </table>
+
+  <h3 style="font-size:14px;margin:24px 0 10px">Steps</h3>
+  <p class="lede" style="margin:0">Check your phone's 7-day average right now, then add 1,000 steps/day until you're at 7,000–10,000. On a genuinely packed day, 6,000 is the floor, not zero.</p>
+</section>
+
+<section id="progress">
+  <div class="kicker"><span class="n">// 08</span><h2>Tracking it</h2></div>
+  <ul class="checklist">
+    <li><b>InBody scan</b> every 4 weeks, same time of day and similar hydration each time — it's the only measure here that separates fat loss from muscle gain.</li>
+    <li><b>Waist at the navel</b>, fortnightly, same time of day — a better week-to-week signal than the scale.</li>
+    <li><b>Photos</b> — front, side, back — fortnightly, same lighting and pose.</li>
+    <li><b>Training log</b> — weight × reps on the main lift of each day, so "add the smallest increment" actually gets tracked.</li>
+    <li><b>Steps and sleep</b> — both move visceral fat more than people expect.</li>
+  </ul>
+  <p class="lede">Judge the block by body-fat % and visceral level first, scale weight second — your own July→August scans are the proof that's the right order.</p>
+</section>
+
+<section id="notes">
+  <div class="kicker"><span class="n">// 09</span><h2>Notes</h2></div>
+  <ul class="checklist">
+    <li>This is a training and nutrition plan, not medical advice. The shoulder-care section is precaution, not treatment — get the shoulder properly assessed if pain persists or the red flags above show up.</li>
+    <li>Numbers throughout (calories, protein, timelines) are estimates from your InBody data and standard sports-nutrition formulas, not lab-measured for you individually. Adjust by how your next scan actually comes in.</li>
+    <li>Built from your saved training-system screenshots and reference material, plus DAREBEE's rotator-cuff and lower-body warm-up routines (darebee.com) for the shoulder-prehab and leg warm-up sequences.</li>
+  </ul>
+</section>
+
+</div>
+
+<footer>Built for Mahesh · Last updated Aug 24 2026 · Re-check with each new InBody scan</footer>
+</body>
+</html>
