@@ -168,6 +168,7 @@
   .stat .delta { font-size: 11.5px; margin-top: 4px; font-family: "Space Mono", monospace; }
   .delta.up { color: var(--good); }
   .delta.flag { color: var(--caution); }
+  .delta.neutral { color: var(--steel); }
 
   table.compare { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0 22px; }
   table.compare th, table.compare td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--hairline); }
@@ -273,18 +274,18 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto !important; }
+    * { scroll-behavior: auto !important; }
     .chevron { transition: none; }
   }
 </style>
+
 </head>
 <body>
-
 <div class="hero">
   <div class="hero-inner">
-    <p class="eyebrow">Training Protocol · Mahesh · Aug 24, 2026</p>
+    <p class="eyebrow">Training Protocol · Mahesh · Rev. Nov 21, 2026</p>
     <h1 class="title">The Recomposition Plan</h1>
-    <p class="subtitle">A shoulder-safe, gym-based strength split and an Indian non-veg cut, built from your own InBody scans — aimed at 75&nbsp;kg, a lean athletic look built on compound strength and power rather than isolation volume, and stronger shoulders, arms and forearms without loading a painful shoulder.</p>
+    <p class="subtitle">A shoulder-safe, gym-based strength split and an Indian non-veg cut, built from your own InBody scans — aimed at 75&nbsp;kg, a clean, proportionate athletic look rather than bulk, built on compound strength and power instead of stacked isolation volume, with stronger shoulders, arms and forearms without loading a painful shoulder.</p>
   </div>
 </div>
 
@@ -305,53 +306,63 @@
 <div class="wrap">
 
 <section id="overview">
-  <div class="kicker"><span class="n">// 01</span><h2>Where you're starting from</h2></div>
-  <p class="lede">Your two InBody scans, five weeks apart, already show the pattern this plan leans on: you gained muscle and lost fat at the same time. The scale barely moved — that's expected, and it's not a bad sign.</p>
+  <div class="kicker"><span class="n">// 01</span><h2>Where you actually are</h2></div>
+  <p class="lede">Three InBody scans so far. Jul 4 → Aug 11 was a genuine recomposition — muscle up, fat down. Aug 11 → Sep 11 reversed it: fat mass up 2.6&nbsp;kg, muscle down 2.0&nbsp;kg, visceral level up to 11. The numbers below are still that Sep&nbsp;11 scan — it's been a while since, so a fresh InBody is overdue (see <a href="#progress">Tracking</a>) before judging how the restructured split below is landing.</p>
 
   <div class="stats">
-    <div class="stat panel"><div class="label">Weight</div><div class="value num">79.9 kg</div><div class="delta up">▲ 0.8 kg vs Jul 4</div></div>
-    <div class="stat panel"><div class="label">Body fat %</div><div class="value num">28.3%</div><div class="delta up">▼ 1.3 pts vs Jul 4</div></div>
-    <div class="stat panel"><div class="label">Skeletal muscle</div><div class="value num">32.4 kg</div><div class="delta up">▲ 1.1 kg vs Jul 4</div></div>
-    <div class="stat panel"><div class="label">Fat mass</div><div class="value num">22.6 kg</div><div class="delta up">▼ 0.8 kg vs Jul 4</div></div>
-    <div class="stat panel"><div class="label">Visceral fat level</div><div class="value num">10</div><div class="delta flag">reference: 1–9</div></div>
-    <div class="stat panel"><div class="label">InBody score</div><div class="value num">68</div><div class="delta up">▲ 3 vs Jul 4</div></div>
+    <div class="stat panel"><div class="label">Weight</div><div class="value num">79.3 kg</div><div class="delta neutral">▼ 0.6 kg vs Aug 11</div></div>
+    <div class="stat panel"><div class="label">Body fat %</div><div class="value num">31.7%</div><div class="delta flag">▲ 3.4 pts vs Aug 11</div></div>
+    <div class="stat panel"><div class="label">Skeletal muscle</div><div class="value num">30.4 kg</div><div class="delta flag">▼ 2.0 kg vs Aug 11</div></div>
+    <div class="stat panel"><div class="label">Fat mass</div><div class="value num">25.2 kg</div><div class="delta flag">▲ 2.6 kg vs Aug 11</div></div>
+    <div class="stat panel"><div class="label">Visceral fat level</div><div class="value num">11</div><div class="delta flag">reference: 1–9</div></div>
+    <div class="stat panel"><div class="label">InBody score</div><div class="value num">62</div><div class="delta flag">▼ 6 vs Aug 11</div></div>
   </div>
 
   <div class="wrap-table">
     <table class="compare">
-      <tr><th>Metric</th><th class="num">Jul 4</th><th class="num">Aug 11</th><th class="num">Change</th></tr>
-      <tr><td>Weight</td><td class="num">79.1 kg</td><td class="num">79.9 kg</td><td class="num">+0.8</td></tr>
-      <tr><td>Skeletal muscle mass</td><td class="num">31.3 kg</td><td class="num">32.4 kg</td><td class="num">+1.1</td></tr>
-      <tr><td>Body fat mass</td><td class="num">23.4 kg</td><td class="num">22.6 kg</td><td class="num">−0.8</td></tr>
-      <tr><td>Body fat %</td><td class="num">29.6%</td><td class="num">28.3%</td><td class="num">−1.3</td></tr>
-      <tr><td>BMI</td><td class="num">25.8</td><td class="num">26.1</td><td class="num">+0.3</td></tr>
-      <tr><td>Basal metabolism</td><td class="num">1574 kcal</td><td class="num">1608 kcal</td><td class="num">+34</td></tr>
+      <tr><th>Metric</th><th class="num">Jul 4</th><th class="num">Aug 11</th><th class="num">Sep 11</th><th class="num">Since Aug 11</th></tr>
+      <tr><td>Weight</td><td class="num">79.1 kg</td><td class="num">79.9 kg</td><td class="num">79.3 kg</td><td class="num">−0.6</td></tr>
+      <tr><td>Skeletal muscle mass</td><td class="num">31.3 kg</td><td class="num">32.4 kg</td><td class="num">30.4 kg</td><td class="num">−2.0</td></tr>
+      <tr><td>Body fat mass</td><td class="num">23.4 kg</td><td class="num">22.6 kg</td><td class="num">25.2 kg</td><td class="num">+2.6</td></tr>
+      <tr><td>Body fat %</td><td class="num">29.6%</td><td class="num">28.3%</td><td class="num">31.7%</td><td class="num">+3.4</td></tr>
+      <tr><td>Total body water</td><td class="num">40.8 L</td><td class="num">42.0 L</td><td class="num">39.6 L</td><td class="num">−2.4</td></tr>
+      <tr><td>BMI</td><td class="num">25.8</td><td class="num">26.1</td><td class="num">25.9</td><td class="num">−0.2</td></tr>
+      <tr><td>Basal metabolism</td><td class="num">1574 kcal</td><td class="num">1608 kcal</td><td class="num">1539 kcal</td><td class="num">−69</td></tr>
+      <tr><td>Visceral fat level</td><td class="num">10</td><td class="num">10</td><td class="num">11</td><td class="num">+1</td></tr>
     </table>
   </div>
 
-  <div class="callout good">
-    <span class="ctitle">Read this before you judge progress by the scale</span>
-    Between the two scans you added 1.1&nbsp;kg of muscle and lost 0.8&nbsp;kg of fat — a genuine recomposition, not a plateau. If that rate continues, expect the scale to move slower than "5&nbsp;kg to lose" suggests, because muscle you're building offsets fat you're losing. Judge this plan by body-fat % and visceral level, not the number alone.
+  <div class="callout caution">
+    <span class="ctitle">Why this scan probably overstates the damage</span>
+    Total body water dropped 2.4&nbsp;L in a month — a much bigger swing than fat or muscle actually change that fast. InBody estimates muscle and fat from how water conducts through you, so a scan taken more dehydrated, at a different time of day, or after travel/alcohol/a heavier meal than your last one will read "more fat, less muscle" even if your body hasn't really changed that much. A week of holiday travel — different sleep, more sitting, alcohol, saltier food, less consistent water — is exactly the kind of week that produces a lower body-water reading. This doesn't mean nothing happened; it means don't take 2.6&nbsp;kg of fat gained and 2.0&nbsp;kg of muscle lost at face value from one scan.
   </div>
 
-  <p class="lede"><b style="color:var(--sand)">12-week target:</b> body fat down toward 23–24% (from 28.3%), visceral fat level back under 10, and scale weight around 76–77&nbsp;kg — with muscle mass held or slightly up. Reaching 75&nbsp;kg at a genuinely lower body-fat % (~20–22%) is realistic in the 16–20 week range if the trend holds. Re-scan every 4 weeks to true this up.</p>
+  <div class="callout neutral">
+    <span class="ctitle">What to actually do about it</span>
+    Two things, not one panicked overhaul: <b style="color:var(--sand)">(1)</b> get a clean re-scan, same time of day, similarly hydrated, ideally fasted — that tells you how much of this was real versus water, and how the restructured split below is actually landing. <b style="color:var(--sand)">(2)</b> tighten up regardless, because "not much junk" during a disrupted week almost always still means more alcohol, more eating out, more sitting, and less sleep than a normal week, even when it doesn't feel like it.
+  </div>
 
-  <p class="lede">Segment data on both scans flags the same thing: trunk and chest carry proportionally more fat than your arms and legs — a very common pattern, and one that responds fine to the same fat-loss process, just proportionally last. There's more on this in <a href="#fat">Belly &amp; chest fat</a> below.</p>
+  <div class="callout neutral">
+    <span class="ctitle">Quick weigh-in</span>
+    79.8&nbsp;kg on the scale — up 0.5&nbsp;kg from the 79.3&nbsp;kg on the Sep 11 InBody. This is a scale reading only, not a full scan, so don't read body-fat or muscle meaning into it on its own; it's consistent with the point above about the next InBody being overdue. Worth getting the actual scan redone soon so the rest of this page is working from current numbers again.
+  </div>
+
+  <p class="lede">Segment data on this scan shows the same fat gain concentrated in the same places as before — trunk highest, then arms, then legs — so nothing about <i>where</i> it's landing has changed, only how much. More on that in <a href="#fat">Belly &amp; chest fat</a> below.</p>
 </section>
 
 <section id="schedule">
   <div class="kicker"><span class="n">// 02</span><h2>The week at a glance</h2></div>
-  <p class="lede">Four gym sessions, three lighter days. Steps and shoulder mobility happen daily, gym or not.</p>
+  <p class="lede">Rest moved to Wednesday, splitting the week in half, with Legs moved to sit right after it — not right before it. That means quads get trained on fresh legs on Thursday instead of being stacked after Monday and Tuesday's upper-body work, which is the actual fix for feeling worn down midweek. Same 5-day Push / Pull / Legs / Upper / Lower backbone, marathon-running layer still dropped.</p>
   <div class="week">
     <div class="wcell"><div class="d">Mon</div><div class="t">Push</div></div>
     <div class="wcell"><div class="d">Tue</div><div class="t">Pull</div></div>
-    <div class="wcell rest"><div class="d">Wed</div><div class="t">Walk + mobility</div></div>
-    <div class="wcell"><div class="d">Thu</div><div class="t">Legs + core</div></div>
-    <div class="wcell"><div class="d">Fri</div><div class="t">Shoulders &amp; arms</div></div>
-    <div class="wcell rest"><div class="d">Sat</div><div class="t">Walk + mobility</div></div>
+    <div class="wcell rest"><div class="d">Wed</div><div class="t">Rest + cardio</div></div>
+    <div class="wcell"><div class="d">Thu</div><div class="t">Legs (quad)</div></div>
+    <div class="wcell"><div class="d">Fri</div><div class="t">Upper</div></div>
+    <div class="wcell"><div class="d">Sat</div><div class="t">Lower (posterior)</div></div>
     <div class="wcell rest"><div class="d">Sun</div><div class="t">Full rest</div></div>
   </div>
-  <p class="lede" style="margin-top:14px">Swap days around your week freely — the only rule is at least one rest or walk-only day between Push and Shoulders/Arms, since both load the same shoulder joint.</p>
+  <p class="lede" style="margin-top:14px">The logic: Push and Pull run back to back early in the week while you're freshest, then Wednesday's rest breaks the week before fatigue compounds. Legs lands right after that rest, not right before it, so Thursday starts on recovered legs rather than tired ones. Upper and Lower then run Friday–Saturday back to back — fine, since they train different muscle groups — before Sunday's full rest closes things out. Swap days if your week demands it, but keep rest right before Legs, not after it, and at least two days between Push and Upper since both are pressing days for the same shoulder.</p>
 </section>
 
 <section id="warmup">
@@ -363,7 +374,7 @@
     Everything below the workout heading is <i>dynamic</i> — movement-based. Save deep, held stretches for after training (see cool-down at the bottom): holding a long static stretch on a cold, unloaded muscle right before lifting can temporarily reduce the strength and power you can produce in that same session.
   </div>
 
-  <h3 style="font-size:14px;margin:22px 0 10px">Before Push, Pull, or Shoulders &amp; Arms</h3>
+  <h3 style="font-size:14px;margin:22px 0 10px">Before Push, Pull, or Upper</h3>
   <table class="ex">
     <tr><th>Move</th><th>Sets × reps</th><th>Note</th></tr>
     <tr><td>Easy cardio</td><td class="sets">3–5 min</td><td class="note">Raise body temperature without fatigue — bike, brisk walk, rower.</td></tr>
@@ -376,7 +387,7 @@
     <tr><td>Ramp-up sets for the first lift</td><td class="sets">light×12 → medium×8 → work×6–10</td><td class="note">Rehearse the exact movement pattern before your working weight.</td></tr>
   </table>
 
-  <h3 style="font-size:14px;margin:24px 0 10px">Before Legs &amp; Core</h3>
+  <h3 style="font-size:14px;margin:24px 0 10px">Before Legs or Lower</h3>
   <table class="ex">
     <tr><th>Move</th><th>Sets × reps</th><th>Note</th></tr>
     <tr><td>Easy cardio</td><td class="sets">3–5 min</td><td class="note">—</td></tr>
@@ -412,47 +423,53 @@
 
 <section id="training">
   <div class="kicker"><span class="n">// 04</span><h2>Training split</h2></div>
-  <p class="lede">No bench press, and nothing that loads the front of the shoulder the way a barbell bench or a heavy overhead press does. Cables, machines and neutral grips instead — they let you build real chest, shoulder and arm size while keeping the joint on a controlled, adjustable path. <b style="color:var(--sand)">Progression:</b> once every set hits the top of its rep range with clean form, add the smallest weight increment available next session. Any pinching, sharp, or radiating pain — stop that exercise, drop the load, or swap in the regression noted.</p>
+  <p class="lede">Rebuilt from the Push / Pull / Legs / Upper / Lower sheet you sent over, kept as the backbone — same weekly order, same exercise families where they were already shoulder-safe (pull-ups, rows, face pulls, squats, RDLs, hip thrusts). Two things from that sheet were swapped out and one was reintroduced carefully — see the callout below for exactly what changed and why. <b style="color:var(--sand)">Progression:</b> once every set hits the top of its rep range with clean form, add the smallest weight increment available next session. Any pinching, sharp, or radiating pain — stop that exercise, drop the load, or swap in the regression noted.</p>
+
+  <div class="callout caution">
+    <span class="ctitle">What changed from the source sheet, and why</span>
+    <b style="color:var(--sand)">Bench press</b> (Push and Upper days) — removed entirely, replaced with neutral-grip dumbbell or cable pressing. This is the one you flagged yourself; no change in reasoning from the original plan. <b style="color:var(--sand)">Weighted dips</b> (Push day) — removed, replaced with standing cable chest press. Dips drive the shoulder into a deep, loaded stretch at the bottom, a common trigger for exactly the kind of pain you've described. <b style="color:var(--sand)">Dumbbell shoulder press</b> — kept, but deliberately lighter and partial-range on both Push and Upper days, marked "testing" in the tables below. This is a controlled re-introduction, not the sheet's prescribed working weight: go light, stop well short of full overhead lockout, and if it's sore the next day, drop it again and stick to the landmine press and lateral raise work instead.
+  </div>
 
   <div class="callout neutral">
-    <span class="ctitle">Lean and athletic, not bodybuilder-volume</span>
-    Revised from a straight bodybuilder split toward a functional one: fewer isolation exercises per muscle, working weight kept lower-rep and heavier (6–10 for most compounds instead of 12–20), and every day now has one explosive or carry-based movement — kettlebell swings, box step-ups, power push-ups — full recovery between sets, no chasing a pump. Less time under the bar per session, more of it spent moving like an athlete. Direct arm/shoulder/forearm work is still in here since that's a stated goal, just trimmed to what earns its place rather than stacked three isolation moves deep.
+    <span class="ctitle">Clean, proportionate, not bulky</span>
+    Two different rep ranges doing two different jobs, on purpose. The big compounds — presses, rows, squats, RDLs, hip thrusts — stay heavier and lower-rep (6–10): that's what actually builds the shape of an athletic, proportionate body, and it does it without piling on size the way high-volume training does. Arm and shoulder accessory work — curls, triceps, lateral raises, rear delts — is deliberately kept at 2 sets and a higher 12–15 reps: enough to bring out definition in the arms and shoulders, not enough volume to add bulk there. "Good arms" here means visible, not big. Most days also carry one explosive or carry-based movement — kettlebell swings, box jumps, broad jumps — which does more for an athletic look than another isolation set would. Push and Upper skip that extra power move, since both are already pressing-heavy days for a shoulder you're managing carefully. The "lean torso" part of this isn't a chest or ab exercise — it's the calorie deficit and cardio day doing their job; see <a href="#fat">Belly &amp; chest fat</a>.
   </div>
 
   <p class="lede" style="margin-top:22px;font-size:13px;color:var(--sand-dim)">Tap a day to expand it.</p>
 
   <details class="day" open>
     <summary>
-      <span class="day-head-left"><span class="dtag">DAY 01</span><h3>Push — Chest &amp; Triceps</h3></span>
+      <span class="day-head-left"><span class="dtag">DAY 01 · MON</span><h3>Push — Chest &amp; Shoulders</h3></span>
       <span class="chevron">▾</span>
     </summary>
     <div class="day-body">
       <div class="warmup"><b>Warm-up (5 min):</b> easy cardio 3 min · band pull-apart 2×15 · scap push-up 2×10 · arm twists 10 · behind-the-back hold 10s/side — <a href="#warmup">full sequence</a></div>
       <table class="ex">
         <tr><th>Exercise</th><th>Sets × reps</th><th>Note</th></tr>
-        <tr><td>Low-incline neutral-grip DB press</td><td class="sets">4×6–8</td><td class="note">Heavier, lower reps — the strength anchor of the day. 15–30° incline, palms in. Stop short of any pinch.</td></tr>
-        <tr><td>Standing cable chest press</td><td class="sets">3×8–10</td><td class="note">Constant tension, easiest on the joint of all pressing here.</td></tr>
-        <tr><td>Explosive push-up</td><td class="sets">3×5–6</td><td class="note">Hands leave the floor slightly, or just drive up as fast as possible. Power, not fatigue — rest a full 60–90s. Regress to a fast knee push-up if needed.</td></tr>
-        <tr><td>Rope triceps pressdown</td><td class="sets">2×10–12</td><td class="note">—</td></tr>
-        <tr><td>Face pull</td><td class="sets">2×15</td><td class="note">Non-negotiable — this stays regardless of the rest of the trim.</td></tr>
+        <tr><td>Low-incline neutral-grip DB press</td><td class="sets">4×6–8</td><td class="note">Replaces the sheet's bench press. Heavier, lower reps — the strength anchor of the day. 15–30° incline, palms in. Stop short of any pinch.</td></tr>
+        <tr><td>Standing cable chest press</td><td class="sets">3×8–10</td><td class="note">Replaces the sheet's weighted dips — same push pattern, none of the deep bottom-stretch dips force on the shoulder.</td></tr>
+        <tr><td>Dumbbell shoulder press — light, partial range <span class="mono" style="color:var(--caution)">[testing]</span></td><td class="sets">2×8–10</td><td class="note">From the sheet, but at roughly half your usual load and stopping around ear height — not a full lockout. Pain-free for 2 sessions in a row before adding any weight. Any next-day soreness, drop it and keep only lateral raises.</td></tr>
+        <tr><td>Cable lateral raise</td><td class="sets">2×12–15</td><td class="note">Constant tension, easier on the joint than a heavy dumbbell.</td></tr>
+        <tr><td>Rope triceps pressdown</td><td class="sets">2×12–15</td><td class="note">Higher reps, light-moderate weight — definition, not mass.</td></tr>
+        <tr><td>Face pull</td><td class="sets">2×15</td><td class="note">Non-negotiable — stays regardless of anything else being trimmed.</td></tr>
       </table>
     </div>
   </details>
 
   <details class="day">
     <summary>
-      <span class="day-head-left"><span class="dtag">DAY 02</span><h3>Pull — Back, Biceps &amp; Forearms</h3></span>
+      <span class="day-head-left"><span class="dtag">DAY 02 · TUE</span><h3>Pull — Back, Biceps &amp; Forearms</h3></span>
       <span class="chevron">▾</span>
     </summary>
     <div class="day-body">
       <div class="warmup"><b>Warm-up (5 min):</b> band pull-apart 2×15 · dead hang 2×20–30s · thoracic rotations 10/side — <a href="#warmup">full sequence</a></div>
       <table class="ex">
         <tr><th>Exercise</th><th>Sets × reps</th><th>Note</th></tr>
-        <tr><td>Lat pulldown, neutral or wide grip</td><td class="sets">4×6–8</td><td class="note">Strength-focused, the anchor lift for back width.</td></tr>
-        <tr><td>Chest-supported row</td><td class="sets">3×8–10</td><td class="note">—</td></tr>
-        <tr><td>Single-arm DB row</td><td class="sets">2×8–10 /side</td><td class="note">—</td></tr>
+        <tr><td>Pull-ups (weighted if comfortable)</td><td class="sets">3×6–8</td><td class="note">Straight from the sheet — already shoulder-friendly. Use an assisted machine or lat pulldown if a clean full rep isn't there yet.</td></tr>
+        <tr><td>Chest-supported row</td><td class="sets">3×8–12</td><td class="note">—</td></tr>
+        <tr><td>Lat pulldown, neutral or wide grip</td><td class="sets">2×10–12</td><td class="note">—</td></tr>
         <tr><td>Kettlebell swing</td><td class="sets">3×12–15</td><td class="note">Explosive hip hinge — does more for an athletic look than another isolation move ever will. No kettlebell? Sub a fast DB Romanian-deadlift-to-high-pull.</td></tr>
-        <tr><td>Hammer curl</td><td class="sets">2×10–12</td><td class="note">Brachioradialis — forearm size driver. Kept lean at 2 sets.</td></tr>
+        <tr><td>Hammer curl</td><td class="sets">2×12–15</td><td class="note">Brachioradialis and forearm shape — light-moderate weight, higher reps, same "definition not mass" rule as the rest of the arm work.</td></tr>
         <tr><td>Farmer's carry, heavy</td><td class="sets">3×30–40m</td><td class="note">Grip, forearms, core, posture — one move.</td></tr>
         <tr><td>Wrist curl + reverse wrist curl</td><td class="sets">1×15–20 each</td><td class="note">Superset, light weight, full stretch.</td></tr>
       </table>
@@ -462,53 +479,85 @@
 
   <details class="day">
     <summary>
-      <span class="day-head-left"><span class="dtag">DAY 03</span><h3>Legs &amp; Core</h3></span>
+      <span class="day-head-left"><span class="dtag">DAY 03 · WED</span><h3>Rest + Cardio</h3></span>
       <span class="chevron">▾</span>
     </summary>
     <div class="day-body">
-      <div class="warmup"><b>Warm-up (5 min):</b> bodyweight squat 2×10 · glute bridge 2×12 · leg swings 10/side · ankle rocks 10/side — <a href="#warmup">full sequence</a></div>
+      <div class="warmup"><b>Keep it light:</b> this is the one scheduled cardio day each week now that there are five gym days — don't turn it into a sixth lifting session. It sits here deliberately, mid-week, so Legs the next day starts fresh rather than fatigued.</div>
       <table class="ex">
-        <tr><th>Exercise</th><th>Sets × reps</th><th>Note</th></tr>
-        <tr><td>Leg press or hack squat</td><td class="sets">3×8–10</td><td class="note">—</td></tr>
-        <tr><td>Romanian deadlift</td><td class="sets">3×8–10</td><td class="note">Already covers the hamstrings — no separate leg curl needed.</td></tr>
-        <tr><td>Walking lunge or split squat</td><td class="sets">2×10 /side</td><td class="note">—</td></tr>
-        <tr><td>Low box step-up or controlled box jump</td><td class="sets">3×6 /side or 3×6</td><td class="note">Single-leg power — the move that actually builds "moves like an athlete", not just size.</td></tr>
-        <tr><td>Standing calf raise</td><td class="sets">3×15</td><td class="note">—</td></tr>
-        <tr><td>Pallof press</td><td class="sets">2×12 /side</td><td class="note">Anti-rotation core, shoulder-neutral.</td></tr>
-        <tr><td>Hanging knee raise or dead bug</td><td class="sets">2×12–15</td><td class="note">—</td></tr>
+        <tr><th>What</th><th>Sets × reps</th><th>Note</th></tr>
+        <tr><td>Real cardio</td><td class="sets">30–40 min</td><td class="note">Brisk incline walk, bike, rower, or intervals (8 rounds of 30s fast / 30s easy). A game of football or badminton works just as well and fits the athletic-not-gym-rat direction better.</td></tr>
+        <tr><td>Rotator cuff sequence</td><td class="sets">2 min</td><td class="note">Full sequence in <a href="#shoulder">Shoulder care</a> — keep this daily if you can, not just today.</td></tr>
       </table>
     </div>
   </details>
 
   <details class="day">
     <summary>
-      <span class="day-head-left"><span class="dtag">DAY 04</span><h3>Shoulders, Arms &amp; Forearms</h3></span>
+      <span class="day-head-left"><span class="dtag">DAY 04 · THU</span><h3>Legs — Quad Focus</h3></span>
+      <span class="chevron">▾</span>
+    </summary>
+    <div class="day-body">
+      <div class="warmup"><b>Warm-up (5 min):</b> bodyweight squat 2×10 · glute bridge 2×12 · leg swings 10/side · ankle rocks 10/side — <a href="#warmup">full sequence</a></div>
+      <table class="ex">
+        <tr><th>Exercise</th><th>Sets × reps</th><th>Note</th></tr>
+        <tr><td>Squat variation — leg press, hack squat, or front squat</td><td class="sets">3×5–8</td><td class="note">Straight from the sheet. Pick whichever your gym has and your knees like best. Trained the day after rest, so this should feel noticeably less heavy than when it followed two straight training days.</td></tr>
+        <tr><td>Romanian deadlift</td><td class="sets">3×6–10</td><td class="note">Already covers the hamstrings — no separate leg curl needed here.</td></tr>
+        <tr><td>Bulgarian split squat</td><td class="sets">2×8–10 /leg</td><td class="note">From the sheet. Stable stance, controlled depth, even pressure through the foot — unilateral work like this is a big part of a proportionate, athletic look rather than pure bilateral mass.</td></tr>
+        <tr><td>Low box step-up or controlled box jump</td><td class="sets">3×6 /side or 3×6</td><td class="note">Single-leg power — this is the move that actually builds "moves like an athlete", not just size.</td></tr>
+        <tr><td>Standing calf raise</td><td class="sets">3×10–15</td><td class="note">—</td></tr>
+        <tr><td>Tibialis raise</td><td class="sets">2×15–20</td><td class="note">From the sheet — shin/ankle health, easy to skip but worth the two minutes.</td></tr>
+        <tr><td>Pallof press</td><td class="sets">2×12 /side</td><td class="note">Anti-rotation core, shoulder-neutral.</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details class="day">
+    <summary>
+      <span class="day-head-left"><span class="dtag">DAY 05 · FRI</span><h3>Upper — Second Press/Pull Day, Arms &amp; Forearms</h3></span>
       <span class="chevron">▾</span>
     </summary>
     <div class="day-body">
       <div class="warmup"><b>Warm-up (5 min):</b> full rotator cuff sequence — see <a href="#shoulder">Shoulder care</a> — plus band external rotation from the <a href="#warmup">warm-up protocol</a></div>
       <table class="ex">
         <tr><th>Exercise</th><th>Sets × reps</th><th>Note</th></tr>
-        <tr><td>Cable lateral raise</td><td class="sets">3×12–15</td><td class="note">Constant tension beats heavy dumbbells here. Reined in from a pure burn-out rep range.</td></tr>
-        <tr><td>Cable or band Y-raise, incline</td><td class="sets">2×12–15</td><td class="note">Lower traps, posture — also covers rear delts, so no separate reverse-fly needed.</td></tr>
-        <tr><td>Single-arm landmine press</td><td class="sets">3×8–10 /side</td><td class="note">Naturally shoulder-friendly bar path. Stop short of lockout if it pinches.</td></tr>
-        <tr><td>Rope hammer curl</td><td class="sets">2×10–12</td><td class="note">—</td></tr>
-        <tr><td>Overhead rope triceps extension</td><td class="sets">2×10–12</td><td class="note">Pain-free range only.</td></tr>
-        <tr><td>Wrist roller or plate pinch hold</td><td class="sets">2 rounds</td><td class="note">Forearm/grip finisher.</td></tr>
+        <tr><td>Flat or seated cable chest press</td><td class="sets">3×6–10</td><td class="note">Replaces the sheet's "bench press or dumbbell press" — a different angle to Monday's incline press, still no bench, no dips.</td></tr>
+        <tr><td>Pull-ups</td><td class="sets">3×6–10</td><td class="note">Straight from the sheet.</td></tr>
+        <tr><td>One-arm dumbbell row</td><td class="sets">3×8–12 /side</td><td class="note">Straight from the sheet.</td></tr>
+        <tr><td>Dumbbell shoulder press — light, partial range <span class="mono" style="color:var(--caution)">[testing]</span></td><td class="sets">2×8–12</td><td class="note">Same caution as Monday — light load, partial range, drop it if sore the next day.</td></tr>
+        <tr><td>Rear-delt fly + hammer or reverse-grip curl</td><td class="sets">2×12–15 each</td><td class="note">The sheet's "optional arms/rear delts" slot, made concrete — this is where your arm and forearm goal actually gets its dedicated work. Light-moderate weight, same shape-not-size reasoning as the rest of the arm work.</td></tr>
+        <tr><td>Wrist roller or plate pinch hold</td><td class="sets">1 round</td><td class="note">Forearm/grip finisher, keep it brief.</td></tr>
       </table>
-      <div class="finisher"><b style="color:var(--sand)">Finisher — conditioning, not steady cardio:</b> 8 rounds of 30s fast incline walk / 30s easy (bike or rower intervals work too). This kind of interval work builds the lean, athletic engine in a way flat steady-state doesn't — swap in sled push/pull or battle ropes instead if your gym has them and your shoulder's fine with it.</div>
+    </div>
+  </details>
+
+  <details class="day">
+    <summary>
+      <span class="day-head-left"><span class="dtag">DAY 06 · SAT</span><h3>Lower — Posterior-Chain Emphasis</h3></span>
+      <span class="chevron">▾</span>
+    </summary>
+    <div class="day-body">
+      <div class="warmup"><b>Warm-up (5 min):</b> bodyweight squat 2×10 · glute bridge 2×12 · leg swings 10/side · ankle rocks 10/side — <a href="#warmup">full sequence</a></div>
+      <table class="ex">
+        <tr><th>Exercise</th><th>Sets × reps</th><th>Note</th></tr>
+        <tr><td>Hip thrust or lighter squat variation</td><td class="sets">2×8–10</td><td class="note">Straight from the sheet. Keep this lighter than Thursday's leg day — it's a different emphasis, not a second max-effort session.</td></tr>
+        <tr><td>Romanian deadlift</td><td class="sets">2×10–12</td><td class="note">Added as requested. Lighter load, higher reps than Thursday's 3×6–10 version — same hinge pattern, but kept easier so the hamstrings aren't doing two max-effort RDL sessions in one week.</td></tr>
+        <tr><td>Step-up or reverse lunge</td><td class="sets">2×8 /leg</td><td class="note">Straight from the sheet.</td></tr>
+        <tr><td>Broad jump</td><td class="sets">3×5</td><td class="note">Posterior-chain power finisher — pairs naturally with a hip-thrust/hinge day. Regress to a slow, controlled step-down jump if landings feel rough.</td></tr>
+        <tr><td>Seated calf raise</td><td class="sets">2×12–15</td><td class="note">Straight from the sheet.</td></tr>
+      </table>
     </div>
   </details>
 
   <div class="callout neutral" style="margin-top:22px">
-    <span class="ctitle">On rest days</span>
-    A 20–30 minute easy walk plus the 2-minute rotator cuff sequence keeps the shoulder mobile without adding load. Steps still count toward your daily target either way. Swapping a walk for a game of football, badminton, or similar is fine too — sport-style movement fits this plan's direction better than more time on a machine.
+    <span class="ctitle">On Sunday</span>
+    Full rest, by design — five gym days plus one dedicated cardio day leaves no slack for a second "easy" session without it quietly becoming overtraining, especially on a calorie deficit. Steps and the 2-minute rotator cuff sequence are fine if you feel like moving, but nothing structured. If a week genuinely calls for more recovery — poor sleep, lingering soreness, a flare of shoulder pain — drop Saturday's Lower day to mobility-only before you'd ever touch Sunday.
   </div>
 </section>
 
 <section id="shoulder">
   <div class="kicker"><span class="n">// 05</span><h2>Shoulder care</h2></div>
-  <p class="lede">This split avoids the movements most likely to aggravate a painful shoulder, but it isn't a diagnosis or treatment. The routine below is a mobility sequence adapted from DAREBEE's rotator-cuff work — run it before every Push and Shoulders/Arms day, and ideally daily.</p>
+  <p class="lede">This split avoids the movements most likely to aggravate a painful shoulder, but it isn't a diagnosis or treatment. The routine below is a mobility sequence adapted from DAREBEE's rotator-cuff work — run it before every Push and Upper day, and ideally daily.</p>
 
   <table class="ex" style="margin-bottom:8px">
     <tr><th>Move</th><th>Reps</th></tr>
@@ -523,34 +572,42 @@
 
   <div class="callout caution">
     <span class="ctitle">See a physiotherapist or sports doctor if</span>
-    Pain is sharp or pinching rather than a dull ache · it wakes you at night · you lose strength or range lifting the arm overhead · pain radiates down toward the elbow. Any of these are worth a proper shoulder assessment before you add load — this plan can't substitute for that, and pushing through those signs is how a manageable issue becomes a structural one.
+    Pain is sharp or pinching rather than a dull ache · it wakes you at night · you lose strength or range lifting the arm overhead · pain radiates down toward the elbow. Any of these are worth a proper shoulder assessment before you add load — this plan can't substitute for that, and pushing through those signs is how a manageable issue becomes a structural one. This matters more now that the dumbbell shoulder press is back in, even lightly.
   </div>
 </section>
 
 <section id="fat">
   <div class="kicker"><span class="n">// 06</span><h2>Belly &amp; chest fat</h2></div>
-  <p class="lede">Your segmental data flags exactly what you're describing: trunk fat is proportionally much higher than arm or leg fat on both scans. That's a genuine pattern — central fat storage is common in South Asian body types even at a "normal" BMI, and it's what's behind your visceral fat level sitting at 10, just above the 1–9 reference range on the InBody sheet.</p>
+  <p class="lede">Your segmental data flags exactly what you're describing: trunk fat is proportionally much higher than arm or leg fat on every scan so far. That's a genuine pattern — central fat storage is common in South Asian body types even at a "normal" BMI, and it's what's behind your visceral fat level, now at 11 and above the 1–9 reference range on the InBody sheet since the Sep 11 scan.</p>
   <ul class="checklist">
     <li>Spot reduction doesn't work — no ab or chest exercise burns fat from that specific area. Overall body-fat % has to drop, and the trunk tends to be the last place it visibly leaves.</li>
     <li>Visceral fat responds disproportionately well to the basics: a consistent calorie deficit, daily steps/movement (not just gym days), resistance training to protect muscle while you cut, 7–8 hours of sleep, and lower stress.</li>
     <li>Cut added sugar and alcohol before cutting carbs generally — both are strongly linked to visceral fat specifically, more than total carbohydrate intake is.</li>
-    <li>Chest training (the incline press and cable chest press in this plan) builds and firms the muscle under the fat, which noticeably improves shape as body fat drops — but it can't remove fat tissue sitting on top of it. Expect chest shape to improve steadily alongside overall fat loss, not overnight.</li>
+    <li>Chest training (the incline and cable press work in this plan) builds and firms the muscle under the fat, which noticeably improves shape as body fat drops — but it can't remove fat tissue sitting on top of it. Expect chest shape to improve steadily alongside overall fat loss, not overnight.</li>
     <li>If you ever notice a firm, coin-sized lump specifically behind the nipple rather than general softness — that's a medical question (possible gynecomastia), not a training one. Worth mentioning to a doctor, not something to try to train away.</li>
   </ul>
 </section>
 
 <section id="nutrition">
   <div class="kicker"><span class="n">// 07</span><h2>Nutrition</h2></div>
-  <p class="lede">Built off your Aug 11 InBody recommended intake (2,335 kcal, essentially your maintenance). A 15% deficit gets you to the range below — enough to lose fat steadily without stalling the muscle gain you're already seeing.</p>
+  <p class="lede"><b style="color:var(--sand)">Unchanged by the training restructure</b> — swapping the day-split doesn't change your energy needs enough to matter, and there's no new scan yet to recalculate from. These are still the Sep 11 reset numbers: recommended intake 2,325 kcal, with a 20% deficit and raised protein to protect muscle while the fat from the reversal comes back off.</p>
 
   <div class="macro-row">
-    <div class="macro panel"><div class="m-label">Calories</div><div class="m-value num">~2,000</div><div class="m-sub">range 1,900–2,050 kcal/day</div></div>
-    <div class="macro panel"><div class="m-label">Protein</div><div class="m-value num">160–170g</div><div class="m-sub">~2g per kg bodyweight</div></div>
-    <div class="macro panel"><div class="m-label">Fat</div><div class="m-value num">55–65g</div><div class="m-sub">~0.7g per kg bodyweight</div></div>
-    <div class="macro panel"><div class="m-label">Carbs</div><div class="m-value num">190–220g</div><div class="m-sub">fills the rest, more on gym days</div></div>
+    <div class="macro panel"><div class="m-label">Calories</div><div class="m-value num">~1,850</div><div class="m-sub">range 1,800–1,900 kcal/day</div></div>
+    <div class="macro panel"><div class="m-label">Protein</div><div class="m-value num">170–180g</div><div class="m-sub">~2.2g per kg bodyweight — raised to protect muscle</div></div>
+    <div class="macro panel"><div class="m-label">Fat</div><div class="m-value num">55–60g</div><div class="m-sub">~0.7g per kg bodyweight</div></div>
+    <div class="macro panel"><div class="m-label">Carbs</div><div class="m-value num">140–165g</div><div class="m-sub">fills the rest, more on gym days</div></div>
   </div>
 
-  <p class="lede">Fibre ≥30g/day, water ~3–3.5L/day. Recalculate this block from your next InBody's basal metabolism figure every 4 weeks — as you gain muscle, your maintenance number will drift up slightly.</p>
+  <p class="lede">Fibre ≥30g/day, water ~3–3.5L/day. Don't go lower than this on calories to chase faster results — a deficit steeper than this is what actually risks losing more muscle, which is the opposite of what this reset is for. Recalculate this block from your next InBody's basal metabolism figure.</p>
+
+  <div class="callout neutral">
+    <span class="ctitle">Travel &amp; holiday days</span>
+    On a trip, don't try to hit these exact numbers. Instead, protect two things only — protein (even 120g/day from eggs, curd, chicken, a shaker bottle) and steps — and let calories and food quality flex. Cap alcohol at a couple of drinks on the heaviest nights rather than cutting it entirely (more sustainable than an all-or-nothing rule), and if there's no gym, the warm-up bodyweight circuits in this plan work as a 15-minute hotel-room session.
+  </div>
+
+  <h3 style="font-size:14px;margin:24px 0 10px">Steps</h3>
+  <p class="lede" style="margin:0">Check your phone's 7-day average, then add 1,000 steps/day until you're at 8,000–12,000. On a genuinely packed day, 7,000 is the floor, not zero — daily movement is one of the lowest-risk levers you have, independent of whatever the gym split looks like.</p>
 
   <h3 style="font-size:14px;margin:24px 0 10px">Protein options by situation</h3>
   <table class="food">
@@ -564,30 +621,28 @@
     <tr><td>Eating out</td><td>Tikka or tandoori over fried or malai-based curries · dal + sabzi + 1–2 roti over naan/paratha · skip sugary lassi or soda</td></tr>
   </table>
 
-  <h3 style="font-size:14px;margin:24px 0 10px">Illustrative day, ≈2,000 kcal / 165g protein</h3>
+  <h3 style="font-size:14px;margin:24px 0 10px">Illustrative day, ≈1,850 kcal / 175g protein</h3>
   <table class="food">
     <tr><th>Meal</th><th>Roughly</th></tr>
-    <tr><td>Breakfast</td><td>4 egg whites + 2 whole eggs bhurji with onion, tomato, capsicum · 2 multigrain roti</td></tr>
+    <tr><td>Breakfast</td><td>4 egg whites + 2 whole eggs bhurji with onion, tomato, capsicum · 1 multigrain roti</td></tr>
     <tr><td>Mid-morning</td><td>200g curd or Greek yogurt · 30g roasted chana</td></tr>
-    <tr><td>Lunch</td><td>200g grilled chicken · 1 cup dal · 2 roti or small bowl rice · large salad</td></tr>
+    <tr><td>Lunch</td><td>200g grilled chicken · 1 cup dal · 1–2 roti · large salad</td></tr>
     <tr><td>Around training</td><td>Protein shake (1 scoop) + a banana</td></tr>
-    <tr><td>Dinner</td><td>150g grilled chicken or fish curry · sautéed vegetables · 1–2 roti or small rice</td></tr>
+    <tr><td>Dinner</td><td>175g grilled chicken or fish curry · sautéed vegetables · 1 roti or small rice</td></tr>
   </table>
-
-  <h3 style="font-size:14px;margin:24px 0 10px">Steps</h3>
-  <p class="lede" style="margin:0">Check your phone's 7-day average right now, then add 1,000 steps/day until you're at 7,000–10,000. On a genuinely packed day, 6,000 is the floor, not zero.</p>
 </section>
 
 <section id="progress">
   <div class="kicker"><span class="n">// 08</span><h2>Tracking it</h2></div>
   <ul class="checklist">
-    <li><b>InBody scan</b> every 4 weeks, same time of day and similar hydration each time — it's the only measure here that separates fat loss from muscle gain.</li>
-    <li><b>Waist at the navel</b>, fortnightly, same time of day — a better week-to-week signal than the scale.</li>
+    <li><b>Get a fresh InBody scan soon</b> — it's been well over two months since Sep 11, longer than planned. You need one both to see how the reversal actually settled and as the baseline for this restructured five-day split.</li>
+    <li><b>Same conditions every time</b> — same time of day, similarly hydrated, ideally fasted and before training, not after. The Aug→Sep swing shows how much scan conditions alone can move these numbers.</li>
+    <li><b>Waist at the navel</b>, fortnightly, same time of day — a better week-to-week signal than the scale, and unaffected by hydration-driven InBody swings.</li>
     <li><b>Photos</b> — front, side, back — fortnightly, same lighting and pose.</li>
-    <li><b>Training log</b> — weight × reps on the main lift of each day, so "add the smallest increment" actually gets tracked.</li>
+    <li><b>Training log</b> — weight × reps on the main lift of each day, so "add the smallest increment" actually gets tracked. Worth also logging soreness (1–10) and sleep hours alongside it, the way the sheet's own progress tracker does — those two predict a bad session better than anything else.</li>
     <li><b>Steps and sleep</b> — both move visceral fat more than people expect.</li>
   </ul>
-  <p class="lede">Judge the block by body-fat % and visceral level first, scale weight second — your own July→August scans are the proof that's the right order.</p>
+  <p class="lede">Judge any single scan against the trend, not in isolation — your own three data points so far show both what's possible (Jul→Aug) and how easily a disrupted week shows up in the numbers (Aug→Sep). Don't overreact to one, don't ignore the other.</p>
 </section>
 
 <section id="notes">
@@ -595,12 +650,13 @@
   <ul class="checklist">
     <li>This is a training and nutrition plan, not medical advice. The shoulder-care section is precaution, not treatment — get the shoulder properly assessed if pain persists or the red flags above show up.</li>
     <li>Numbers throughout (calories, protein, timelines) are estimates from your InBody data and standard sports-nutrition formulas, not lab-measured for you individually. Adjust by how your next scan actually comes in.</li>
+    <li>The day-split backbone (Push / Pull / Legs / Upper / Lower) and several individual exercises — pull-ups, rows, face pulls, squats, Romanian deadlifts, Bulgarian split squats, hip thrusts, tibialis raises — come from the "Gym + Marathon Training Split" sheet you shared. The running layer from that sheet was intentionally left out here, and bench press, weighted dips and full-range overhead pressing were swapped or modified for the shoulder, as detailed in <a href="#training">Training split</a>.</li>
     <li>Built from your saved training-system screenshots and reference material, plus DAREBEE's rotator-cuff and lower-body warm-up routines (darebee.com) for the shoulder-prehab and leg warm-up sequences.</li>
   </ul>
 </section>
 
 </div>
 
-<footer>Built for Mahesh · Last updated Aug 24 2026 · Re-check with each new InBody scan</footer>
+<footer>Built for Mahesh · Last updated Nov 21 2026 · Re-check with each new InBody scan</footer>
 </body>
 </html>
